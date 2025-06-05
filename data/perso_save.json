@@ -1,0 +1,14 @@
+{
+  "nom": "Momo",
+  "stats": {
+    "health": 120,
+    "strength": 15,
+    "dexterity": 8,
+    "intelligence": 4
+  },
+  "inventaire": [
+    "potion_01",
+    "arc_long"
+  ],
+  "current_zone": "zone_foret_nord"
+}

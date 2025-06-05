@@ -1,6 +1,13 @@
+use std::collections::HashMap;
+use std::io::{self, Write};
+use serde::Deserialize;
+use serde::Serialize;
+
 extern crate rpg; 
 
 use rpg::model::attributes::Attributes;
+
+/*
 
 // Définition des traits
 trait Describable {
@@ -92,8 +99,73 @@ impl Npc {
         }
     }
 }
+*/
+
+
+
+/// Structure principale du personnage, conforme au diagramme de classe
+#[derive(Debug, Serialize)]
+struct Perso {
+    nom: String,
+    stats: Attributes,
+    inventaire: Vec<String>,
+    current_zone: String,
+}
+
+/// Structure pour lire les profils depuis attributes.json
+#[derive(Debug, Deserialize)]
+struct AttributesProfile {
+    profile: String,
+    stats: Attributes,
+}
+
+/// Fonction pour charger tous les profils depuis attributes.json
+fn charger_profils(path: &str) -> HashMap<String, Attributes> {
+    let contenu = std::fs::read_to_string(path)
+        .expect("Erreur lors de la lecture du fichier attributes.json");
+
+    let profils: Vec<AttributesProfile> = serde_json::from_str(&contenu)
+        .expect("Erreur lors du parsing JSON");
+
+    let mut map = HashMap::new();
+    for p in profils {
+        map.insert(p.profile, p.stats);
+    }
+    map
+}
+
+/// Lit une ligne depuis la console (avec message)
+fn lire_input(msg: &str) -> String {
+    print!("{}", msg);
+    io::stdout().flush().unwrap();
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    input.trim().to_string()
+}
+
+/// Menu pour sélectionner une valeur dans une liste
+fn choisir_parmi(label: &str, options: &[&str]) -> String {
+    println!("{} :", label);
+    for (i, option) in options.iter().enumerate() {
+        println!("  [{}] {}", i + 1, option);
+    }
+
+    loop {
+        let choix = lire_input("Entrez le numéro de votre choix : ");
+        if let Ok(index) = choix.parse::<usize>() {
+            if index >= 1 && index <= options.len() {
+                return options[index - 1].to_string();
+            }
+        }
+        println!("❌ Choix invalide, réessayez.");
+    }
+}
+
+
+
 
 fn main() {
+/*
     // creation d'une quete
     let quete_marchand = Quest::new(
         1,
@@ -159,4 +231,62 @@ fn main() {
     println!("Après malus: {:?}", stats);
     
     println!("\n ------------------------- ");
+    */
+    
+    
+    
+    
+    // Étape 1 : Charger les profils de classes
+    let profils = charger_profils("data/attributes.json");
+    let noms_profils: Vec<&str> = profils.keys().map(|k| k.as_str()).collect();
+
+    // Étape 2 : Nom du joueur
+    let nom = lire_input("Entrez votre nom de personnage (laisser vide pour 'Inconnu') : ");
+    let nom = if nom.is_empty() { "Inconnu".to_string() } else { nom };
+
+    // Étape 3 : Choix du profil
+    let profil_choisi = choisir_parmi("Choisissez une classe", &noms_profils);
+    let stats = profils.get(&profil_choisi).unwrap().clone();
+
+    // Étape 4 : Choix de l'inventaire (items fictifs)
+    let items_disponibles = vec!["potion_01", "arc_long", "épée_fer", "amulette_vent"];
+    println!("Sélectionnez des objets (tapez les numéros séparés par des virgules, ex: 1,3) :");
+    for (i, item) in items_disponibles.iter().enumerate() {
+        println!("  [{}] {}", i + 1, item);
+    }
+
+    let mut inventaire = vec![];
+    let choix_items = lire_input("Objets : ");
+    for s in choix_items.split(',') {
+        if let Ok(idx) = s.trim().parse::<usize>() {
+            if idx >= 1 && idx <= items_disponibles.len() {
+                inventaire.push(items_disponibles[idx - 1].to_string());
+            }
+        }
+    }
+
+    // Étape 5 : Choix de la zone
+    let zones_disponibles = vec!["zone_foret_nord", "zone_montagne_ouest", "zone_tour_arcane"];
+    let current_zone = choisir_parmi("Choisissez une zone de départ", &zones_disponibles);
+
+    // Étape 6 : Création du personnage
+    let perso = Perso {
+        nom,
+        stats,
+        inventaire,
+        current_zone,
+    };
+
+    println!("\n✅ Personnage créé avec succès :\n{:#?}", perso);
+
+    
+    
+    // À la fin du main()
+    let json = serde_json::to_string_pretty(&perso).unwrap();
+    std::fs::write("data/perso_save.json", json).unwrap();
+    println!("💾 Sauvegarde effectuée dans data/perso_save.json !");
+
+    
+    
+    
 }
