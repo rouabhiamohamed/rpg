@@ -1,3 +1,7 @@
+extern crate rpg; 
+
+use rpg::model::attributes::Attributes;
+
 // Définition des traits
 trait Describable {
     fn name(&self) -> &String;
@@ -141,4 +145,18 @@ fn main() {
     let desc_marchand = marchand.description();
     println!("Le {} : {}", nom_marchand, desc_marchand);
     println!("{}", marchand.quest_info());
+    
+    println!("\n=== Test avec les attributs ===");
+    
+    let mut stats = Attributes::new(100, 10, 5, 7);
+    let bonus = Attributes::new(10, 2, 0, 1);
+    let malus = Attributes::new(-20, -3, -1, 0);
+
+    println!("Avant modification: {:?}", stats);
+    stats.apply_delta(&bonus);
+    println!("Après bonus: {:?}", stats);
+    stats.apply_delta(&malus);
+    println!("Après malus: {:?}", stats);
+    
+    println!("\n ------------------------- ");
 }

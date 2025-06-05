@@ -1,0 +1,111 @@
+[
+  {
+    "profile": "guerrier",
+    "stats": {
+      "health": 120,
+      "strength": 15,
+      "dexterity": 8,
+      "intelligence": 4
+    }
+  },
+  {
+    "profile": "mage",
+    "stats": {
+      "health": 80,
+      "strength": 5,
+      "dexterity": 10,
+      "intelligence": 18
+    }
+  },
+  {
+    "profile": "voleur",
+    "stats": {
+      "health": 90,
+      "strength": 8,
+      "dexterity": 16,
+      "intelligence": 7
+    }
+  },
+  {
+    "profile": "paladin",
+    "stats": {
+      "health": 110,
+      "strength": 12,
+      "dexterity": 9,
+      "intelligence": 10
+    }
+  },
+  {
+    "profile": "ranger",
+    "stats": {
+      "health": 95,
+      "strength": 10,
+      "dexterity": 14,
+      "intelligence": 9
+    }
+  },
+  {
+    "profile": "nécromancien",
+    "stats": {
+      "health": 70,
+      "strength": 4,
+      "dexterity": 9,
+      "intelligence": 20
+    }
+  },
+  {
+    "profile": "PNJ_villageois",
+    "stats": {
+      "health": 60,
+      "strength": 2,
+      "dexterity": 4,
+      "intelligence": 6
+    }
+  },
+  {
+    "profile": "PNJ_marchand",
+    "stats": {
+      "health": 65,
+      "strength": 3,
+      "dexterity": 5,
+      "intelligence": 10
+    }
+  },
+  {
+    "profile": "ennemi_bandit",
+    "stats": {
+      "health": 85,
+      "strength": 11,
+      "dexterity": 10,
+      "intelligence": 6
+    }
+  },
+  {
+    "profile": "ennemi_orc",
+    "stats": {
+      "health": 130,
+      "strength": 17,
+      "dexterity": 6,
+      "intelligence": 3
+    }
+  },
+  {
+    "profile": "sorcier_maléfique",
+    "stats": {
+      "health": 90,
+      "strength": 7,
+      "dexterity": 8,
+      "intelligence": 22
+    }
+  },
+  {
+    "profile": "druide",
+    "stats": {
+      "health": 100,
+      "strength": 6,
+      "dexterity": 9,
+      "intelligence": 15
+    }
+  }
+]
+
