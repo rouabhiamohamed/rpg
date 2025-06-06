@@ -1,3 +1,9 @@
+mod item;
+mod quest;
+
+use item::{Item, ItemType};
+use quest::Quest;
+
 // Définition des traits
 trait Describable {
     fn name(&self) -> &String;
@@ -13,40 +19,20 @@ trait QuestGiver {
     fn quest_info(&self) -> String;
 }
 
-// structure simple de quete en attendant la  vrai
-struct Quest {
-    id: u32,
-    name: String,
-    description: String,
-    completed: bool,
-}
-
-impl Quest {
-    fn new(id: u32, name: String, description: String) -> Quest {
-        Quest {
-            id,
-            name,
-            description,
-            completed: false,
-        }
-    }
-}
-
 struct Npc {
     id: u32,
     name: String,
     description: String,
     dialogues: Vec<String>,
-    quests: Vec<Quest>,  
+    quests: Vec<Quest>,
 }
 
 impl Describable for Npc {
     fn name(&self) -> &String {
-        &self.name  
+        &self.name
     }
-
     fn description(&self) -> &String {
-        &self.description  
+        &self.description
     }
 }
 
@@ -55,7 +41,7 @@ impl Interactable for Npc {
         if self.dialogues.is_empty() {
             format!("{} n'a rien à dire.", self.name)
         } else {
-            //prendre le premier dialogue
+            // on prend toujours le premier dialogue, par souci de simplicité
             format!("{} dit : '{}'", self.name, &self.dialogues[0])
         }
     }
@@ -63,22 +49,26 @@ impl Interactable for Npc {
 
 impl QuestGiver for Npc {
     fn has_quest(&self) -> bool {
-        !self.quests.is_empty()  // vrai si la liste n'est pas vide
+        !self.quests.is_empty()
     }
-
     fn quest_info(&self) -> String {
         if self.quests.is_empty() {
             format!("{} : 'Je n'ai pas de quête pour toi.'", self.name)
         } else {
-            // premiere quete dans la liste
+            // on affiche la première quête disponible
             format!("{} : 'J'ai une quête : {}'", self.name, &self.quests[0].name)
         }
     }
 }
 
-
 impl Npc {
-    fn new(id: u32, name: String, description: String, dialogues: Vec<String>, quests: Vec<Quest>) -> Npc {
+    fn new(
+        id: u32,
+        name: String,
+        description: String,
+        dialogues: Vec<String>,
+        quests: Vec<Quest>,
+    ) -> Npc {
         Npc {
             id,
             name,
@@ -90,14 +80,15 @@ impl Npc {
 }
 
 fn main() {
-    // creation d'une quete
+    // --- Création d'une quête "marchand" (sans objet requis) ---
     let quete_marchand = Quest::new(
         1,
         "Trouver des herbes rares".to_string(),
-        "Le marchand a besoin d'herbes pour ses potions".to_string()
+        "Le marchand a besoin d'herbes pour ses potions".to_string(),
+        None, // pas d'objet précis à ramener
     );
 
-    //npc avec quete
+    // --- NPC "marchand" avec une quête ---
     let marchand = Npc::new(
         1,
         "Gérard le Marchand".to_string(),
@@ -106,16 +97,16 @@ fn main() {
             "Bienvenue dans ma boutique !".to_string(),
             "J'ai de très bonnes affaires aujourd'hui.".to_string(),
         ],
-        vec![quete_marchand]  
+        vec![quete_marchand],
     );
 
-    // npc sans quete
+    // --- NPC "garde" sans quête ni dialogue ---
     let garde = Npc::new(
         2,
         "Garde Royal".to_string(),
         "Un garde imposant en armure brillante".to_string(),
-        vec![], // pas de dialogue
-        vec![]  // pas de quete
+        vec![],
+        vec![],
     );
 
     println!("=== Informations des NPCs ===");
@@ -141,4 +132,25 @@ fn main() {
     let desc_marchand = marchand.description();
     println!("Le {} : {}", nom_marchand, desc_marchand);
     println!("{}", marchand.quest_info());
+
+    /////////////////////////////////////////////////////////////////////////////
+    // --- Exemple d’Item et d’une quête liée à un objet ---
+    let potion = Item {
+        id: 1,
+        nom: "Potion de soin".to_string(),
+        description: "Rend 50 PV".to_string(),
+        item_type: ItemType::Consommable,
+        utilisable: true,
+    };
+
+    // Ici, on crée une quête qui demande spécifiquement l'objet d'id = 1
+    let quete_objet = Quest::new(
+        2,
+        "Trouver la potion".to_string(),
+        "Donner une potion de soin au villageois.".to_string(),
+        Some(1), // l'ID de l'objet "Potion de soin"
+    );
+
+    // On peut afficher les deux structures grâce au trait Debug
+    println!("{:?}\n{:?}", potion, quete_objet);
 }
