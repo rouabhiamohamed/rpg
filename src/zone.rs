@@ -10,6 +10,7 @@ pub enum Direction {
     West,
 }
  
+
 #[derive(Debug, Deserialize)]
 pub struct ZoneRaw {
     pub id: u32,
