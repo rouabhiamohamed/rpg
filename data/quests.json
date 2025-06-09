@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "name": "Chasse aux rats",
+      "description": "Éliminez 5 rats dans les égouts.",
+      "objet_requis_id": null,
+      "completed": false
+    },
+    {
+      "id": 2,
+      "name": "Livraison de potion",
+      "description": "Donnez une potion de soin à l’herboriste.",
+      "objet_requis_id": 1,
+      "completed": false
+    },
+     {
+      "id": 3,
+      "name": "Protection du village",
+      "description": "Protégez le village contre 10 gobelins.",
+      "objet_requis_id": null,
+      "completed": false
+    },
+    {
+      "id": 4,
+      "name": "Récupération d'artefact",
+      "description": "Trouvez l'artefact perdu dans la grotte.",
+      "objet_requis_id": null,
+      "completed": false
+    },
+    {
+      "id": 5,
+      "name": "Chasse au dragon",
+      "description": "Tuez le dragon qui terrorise la région.",
+      "objet_requis_id": null,
+      "completed": false
+    }
+  ]
+  
+

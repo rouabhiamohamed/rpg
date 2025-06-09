@@ -1,0 +1,68 @@
+[
+    {
+      "id": 1,
+      "name": "Potion de soin",
+      "description": "Rend 50 points de vie",
+      "value": 75,
+      "item_type": "Consommable",
+      "utilisable": true
+    },
+    {
+      "id": 2,
+      "name": "Épée courte",
+      "description": "Une lame légère et maniable.",
+      "value": 100,
+      "item_type": "Arme",
+      "utilisable": false
+    }
+  ,
+{
+    "id": 3,
+    "name": "Bouclier en bois",
+    "description": "Un bouclier léger qui offre une protection de base.",
+    "value": 50,
+    "item_type": "Armure",
+    "utilisable": false
+  },
+  {
+    "id": 4,
+    "name": "Potion de mana",
+    "description": "Rend 30 points de mana",
+    "value": 80,
+    "item_type": "Consommable",
+    "utilisable": true
+  },
+  {
+    "id": 5,
+    "name": "Arc long",
+    "description": "Un arc puissant pour les tireurs d'élite.",
+    "value": 150,
+    "item_type": "Arme",
+    "utilisable": false
+  },
+  {
+    "id": 6,
+    "name": "Armure en cuir",
+    "description": "Une armure légère qui offre une bonne protection.",
+    "value": 120,
+    "item_type": "Armure",
+    "utilisable": false
+  },
+  {
+    "id": 7,
+    "name": "Potion de régénération",
+    "description": "Rend 20 points de vie par seconde pendant 5 secondes.",
+    "value": 100,
+    "item_type": "Consommable",
+    "utilisable": true
+  },
+  {
+    "id": 8,
+    "name": "Bâton de mage",
+    "description": "Un bâton puissant qui augmente les dégâts magiques.",
+    "value": 200,
+    "item_type": "Arme",
+    "utilisable": false
+  }
+]
+
