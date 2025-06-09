@@ -1,19 +1,7 @@
-// Définition des traits
-trait Describable {
-    fn name(&self) -> &String;
-    fn description(&self) -> &String;
-}
+use std::fs;
+use serde::{Deserialize, Serialize};
 
-trait Interactable {
-    fn interact(&self) -> String;
-}
-
-trait QuestGiver {
-    fn has_quest(&self) -> bool;
-    fn quest_info(&self) -> String;
-}
-
-// structure simple de quete en attendant la  vrai
+#[derive(Debug, Deserialize, Clone)]
 struct Quest {
     id: u32,
     name: String,
@@ -21,124 +9,165 @@ struct Quest {
     completed: bool,
 }
 
-impl Quest {
-    fn new(id: u32, name: String, description: String) -> Quest {
-        Quest {
-            id,
-            name,
-            description,
-            completed: false,
-        }
-    }
+#[derive(Debug, Deserialize)]
+struct NpcRaw {
+    id: u32,
+    name: String,
+    description: String,
+    dialogues: Vec<String>,
+    quests: Vec<u32>,
 }
 
+#[derive(Debug, Clone)]
 struct Npc {
     id: u32,
     name: String,
     description: String,
     dialogues: Vec<String>,
-    quests: Vec<Quest>,  
+    quests: Vec<Quest>,
 }
 
-impl Describable for Npc {
-    fn name(&self) -> &String {
-        &self.name  
+impl Npc {
+    fn name(&self) -> &str {
+        &self.name
     }
 
-    fn description(&self) -> &String {
-        &self.description  
+    fn description(&self) -> &str {
+        &self.description
     }
-}
 
-impl Interactable for Npc {
     fn interact(&self) -> String {
         if self.dialogues.is_empty() {
             format!("{} n'a rien à dire.", self.name)
         } else {
-            //prendre le premier dialogue
             format!("{} dit : '{}'", self.name, &self.dialogues[0])
         }
     }
-}
 
-impl QuestGiver for Npc {
     fn has_quest(&self) -> bool {
-        !self.quests.is_empty()  // vrai si la liste n'est pas vide
+        !self.quests.is_empty()
     }
 
     fn quest_info(&self) -> String {
         if self.quests.is_empty() {
             format!("{} : 'Je n'ai pas de quête pour toi.'", self.name)
         } else {
-            // premiere quete dans la liste
-            format!("{} : 'J'ai une quête : {}'", self.name, &self.quests[0].name)
+            format!("{} : 'J'ai une quête : {}'", self.name, self.quests[0].name)
         }
     }
 }
 
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
 
-impl Npc {
-    fn new(id: u32, name: String, description: String, dialogues: Vec<String>, quests: Vec<Quest>) -> Npc {
-        Npc {
-            id,
-            name,
-            description,
-            dialogues,
-            quests,
+#[derive(Debug, Deserialize)]
+struct ZoneRaw {
+    id: u32,
+    name: String,
+    description: String,
+    connections: Vec<String>,
+    npcs: Vec<u32>,
+}
+
+#[derive(Debug)]
+struct Zone {
+    id: u32,
+    name: String,
+    description: String,
+    connections: Vec<Direction>,
+    npcs: Vec<Npc>,
+}
+
+impl Zone {
+    fn afficher(&self) {
+        println!("== Zone [{}] : {} ==", self.id, self.name);
+        println!("{}", self.description);
+
+        if self.connections.is_empty() {
+            println!("Pas de sorties.");
+        } else {
+            println!("Sorties disponibles :");
+            for dir in &self.connections {
+                println!("- {:?}", dir);
+            }
+        }
+
+        if self.npcs.is_empty() {
+            println!("Personne dans cette zone.");
+        } else {
+            println!("PNJs présents :");
+            for npc in &self.npcs {
+                println!("-> {} : {}", npc.name(), npc.description());
+                println!("   {}", npc.interact());
+                println!("   {}", npc.quest_info());
+            }
         }
     }
 }
 
 fn main() {
-    // creation d'une quete
-    let quete_marchand = Quest::new(
-        1,
-        "Trouver des herbes rares".to_string(),
-        "Le marchand a besoin d'herbes pour ses potions".to_string()
-    );
+    let quests_json = fs::read_to_string("quests.json").expect("Erreur lecture quests.json");
+    let npcs_json = fs::read_to_string("npcs.json").expect("Erreur lecture npcs.json");
+    let zones_json = fs::read_to_string("zones.json").expect("Erreur lecture zones.json");
 
-    //npc avec quete
-    let marchand = Npc::new(
-        1,
-        "Gérard le Marchand".to_string(),
-        "Un vieux marchand aux yeux pétillants".to_string(),
-        vec![
-            "Bienvenue dans ma boutique !".to_string(),
-            "J'ai de très bonnes affaires aujourd'hui.".to_string(),
-        ],
-        vec![quete_marchand]  
-    );
+    let all_quests: Vec<Quest> = serde_json::from_str(&quests_json).unwrap();
+    let npc_raw: Vec<NpcRaw> = serde_json::from_str(&npcs_json).unwrap();
+    let zone_raw: Vec<ZoneRaw> = serde_json::from_str(&zones_json).unwrap();
 
-    // npc sans quete
-    let garde = Npc::new(
-        2,
-        "Garde Royal".to_string(),
-        "Un garde imposant en armure brillante".to_string(),
-        vec![], // pas de dialogue
-        vec![]  // pas de quete
-    );
+    let npcs: Vec<Npc> = npc_raw
+        .into_iter()
+        .map(|n| {
+            let quests = n
+                .quests
+                .iter()
+                .filter_map(|qid| all_quests.iter().find(|q| q.id == *qid).cloned())
+                .collect();
+            Npc {
+                id: n.id,
+                name: n.name,
+                description: n.description,
+                dialogues: n.dialogues,
+                quests,
+            }
+        })
+        .collect();
 
-    println!("=== Informations des NPCs ===");
-    println!("Nom: {}", marchand.name());
-    println!("Description: {}", marchand.description());
-    println!();
-    println!("Nom: {}", garde.name());
-    println!("Description: {}", garde.description());
+    let zones: Vec<Zone> = zone_raw
+        .into_iter()
+        .map(|z| {
+            let zone_npcs = z
+                .npcs
+                .iter()
+                .filter_map(|nid| npcs.iter().find(|n| n.id == *nid).cloned())
+                .collect();
+            let connections = z
+                .connections
+                .iter()
+                .filter_map(|d| match d.as_str() {
+                    "North" => Some(Direction::North),
+                    "South" => Some(Direction::South),
+                    "East" => Some(Direction::East),
+                    "West" => Some(Direction::West),
+                    _ => None,
+                })
+                .collect();
+            Zone {
+                id: z.id,
+                name: z.name,
+                description: z.description,
+                connections,
+                npcs: zone_npcs,
+            }
+        })
+        .collect();
 
-    println!("\n=== Interactions ===");
-    println!("{}", marchand.interact());
-    println!("{}", garde.interact());
-
-    println!("\n=== Quêtes ===");
-    println!("Marchand a une quête ? {}", marchand.has_quest());
-    println!("{}", marchand.quest_info());
-    println!();
-    println!("Garde a une quête ? {}", garde.has_quest());
-    println!("{}", garde.quest_info());
-
-    println!("\n=== Test d'emprunts multiples ===");
-    let nom_marchand = marchand.name();
-    let desc_marchand = marchand.description();
-    println!("Le {} : {}", nom_marchand, desc_marchand);
-    println!("{}", marchand.quest_info());
+    if let Some(zone) = zones.first() {
+        zone.afficher();
+    }
 }
