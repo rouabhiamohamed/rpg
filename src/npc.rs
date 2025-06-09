@@ -60,3 +60,39 @@ impl Npc {
         }
     }
 }
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::quest::Quest;
+
+    #[test]
+    fn test_npc_has_quest() {
+        let quest = Quest {
+            id: 1,
+            name: "Test Quest".to_string(),
+            description: "Desc".to_string(),
+            completed: false,
+        };
+        let npc = Npc {
+            id: 1,
+            name: "Test".to_string(),
+            description: "desc".to_string(),
+            dialogues: vec!["Salut".to_string()],
+            quests: vec![quest],
+        };
+        assert!(npc.quest_info().contains("Test Quest"));
+    }
+
+    #[test]
+    fn test_npc_interact_empty() {
+        let npc = Npc {
+            id: 2,
+            name: "Muet".to_string(),
+            description: "Rien à dire".to_string(),
+            dialogues: vec![],
+            quests: vec![],
+        };
+        assert!(npc.interact().contains("n'a rien à dire"));
+    }
+}
+
