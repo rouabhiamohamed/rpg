@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "name": "Village paisible",
+    "description": "Un petit village entour\u00e9 de champs verts.",
+    "connections": [
+      "North",
+      "East"
+    ],
+    "npcs": [
+      1,
+      2
+    ]
+  }
+]

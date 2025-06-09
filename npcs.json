@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "name": "G\u00e9rard le Marchand",
+    "description": "Un vieux marchand aux yeux p\u00e9tillants",
+    "dialogues": [
+      "Bienvenue dans ma boutique !",
+      "J'ai de tr\u00e8s bonnes affaires aujourd'hui."
+    ],
+    "quests": [
+      1
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Garde Royal",
+    "description": "Un garde imposant en armure brillante",
+    "dialogues": [],
+    "quests": []
+  }
+]
