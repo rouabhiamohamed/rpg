@@ -27,7 +27,7 @@
     "id": 12,
     "name": "Ferme de Tom",
     "description": "Une ferme paisible avec de vastes champs de blé doré. Des poules picorent dans la cour et un puits se dresse au centre.",
-    "connections": ["South", "West"],
+    "connections": ["South", "West", "North"],
     "npcs": [4],
     "monsters": [5]
   },

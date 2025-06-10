@@ -220,16 +220,43 @@ impl Game {
 
     fn deplacer_joueur(&mut self, direction: &Direction) -> Result<bool, Box<dyn std::error::Error>> {
         // Pour l'instant, implémentation simple : chaque direction mène à une zone spécifique
-        let nouvelle_zone = match direction {
-            Direction::North => self.player.current_zone_id + 1,
-            Direction::South => if self.player.current_zone_id > 1 { self.player.current_zone_id - 1 } else { 1 },
-            Direction::East => self.player.current_zone_id + 10,
-            Direction::West => if self.player.current_zone_id >= 10 { self.player.current_zone_id - 10 } else { self.player.current_zone_id },
+        let nouvelle_zone = match (self.player.current_zone_id, direction) {
+            // Zone 1 - Place du Village
+            (1, Direction::North) => Some(2),   // Forêt du Nord
+            (1, Direction::East) => Some(11),   // Maison d'Elara
+
+            // Zone 2 - Forêt du Nord
+            (2, Direction::South) => Some(1),   // Place du Village
+            (2, Direction::East) => Some(12),   // Ferme de Tom
+
+            // Zone 11 - Maison d'Elara
+            (11, Direction::West) => Some(1),   // Place du Village
+            (11, Direction::North) => Some(12), // Ferme de Tom
+
+            // Zone 12 - Ferme de Tom
+            (12, Direction::South) => Some(11), // Maison d'Elara
+            (12, Direction::West) => Some(2),   // Forêt du Nord
+            (12, Direction::North) => Some(21), // Clairière Mystique
+
+            // Zone 21 - Clairière Mystique
+            (21, Direction::South) => Some(12), // Ferme de Tom
+
+            // Autres combinaisons invalides
+            _ => None,
         };
 
-        if self.zones.contains_key(&nouvelle_zone) {
-            self.player.current_zone_id = nouvelle_zone;
-            println!("🚶 Vous vous dirigez vers {:?}...", direction);
+        if let Some(zone_id) = nouvelle_zone {
+            if self.zones.contains_key(&zone_id) {
+                self.player.current_zone_id = zone_id;
+                println!("🚶 Vous vous dirigez vers {:?}...", direction);
+
+                // Afficher le nom de la nouvelle zone
+                if let Some(zone) = self.zones.get(&zone_id) {
+                    println!("📍 Vous arrivez à : {}", zone.name);
+                }
+            } else {
+                println!("🚫 Cette zone n'existe pas !");
+            }
         } else {
             println!("🚫 Il n'y a rien dans cette direction.");
         }
