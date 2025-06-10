@@ -111,3 +111,107 @@ impl Zone {
         }
     }
 }
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::npc::Npc;
+    use crate::monster::Monster;
+    use crate::quest::Quest;
+
+    #[test]
+    fn test_directions_francaises() {
+        let raw = ZoneRaw {
+            id: 1,
+            name: "Place du Village".to_string(),
+            description: "La place centrale du village".to_string(),
+            connections: vec!["nord".to_string(), "sud".to_string(), "est".to_string(), "ouest".to_string()],
+            npcs: vec![],
+            monsters: None,
+        };
+
+        let zone = Zone::from_raw(raw, &[], &[]);
+        assert_eq!(zone.connections.len(), 4);
+        assert!(matches!(zone.connections[0], Direction::North));
+        assert!(matches!(zone.connections[1], Direction::South));
+        assert!(matches!(zone.connections[2], Direction::East));
+        assert!(matches!(zone.connections[3], Direction::West));
+    }
+
+    #[test]
+    fn test_directions_invalides_ignorees() {
+        let raw = ZoneRaw {
+            id: 2,
+            name: "Zone Corrompue".to_string(),
+            description: "Données partiellement corrompues".to_string(),
+            connections: vec!["nord".to_string(), "direction_invalide".to_string(), "sud".to_string()],
+            npcs: vec![],
+            monsters: None,
+        };
+
+        let zone = Zone::from_raw(raw, &[], &[]);
+        assert_eq!(zone.connections.len(), 2); // Seuls "nord" et "sud" sont valides
+    }
+
+    #[test]
+    fn test_zone_avec_entites() {
+        let quete = Quest {
+            id: 1,
+            name: "Sauver le Village".to_string(),
+            description: "Éliminez les monstres qui menacent le village".to_string(),
+            objet_requis_id: None,
+            completed: false,
+        };
+
+        let pnj = Npc {
+            id: 1,
+            name: "Maire du Village".to_string(),
+            description: "Le dirigeant du village".to_string(),
+            dialogues: vec!["Aidez-nous, brave aventurier !".to_string()],
+            quests: vec![quete],
+        };
+
+        let monstre = Monster {
+            id: 1,
+            name: "Loup Enragé".to_string(),
+            description: "Un loup aux yeux rouges".to_string(),
+            max_health: 40,
+            current_health: 40,
+            strength: 12,
+            defense: 3,
+            agility: 10,
+            loot: vec![5],
+            experience: 20,
+        };
+
+        let raw = ZoneRaw {
+            id: 3,
+            name: "Lisière de la Forêt".to_string(),
+            description: "Où le village rencontre la nature sauvage".to_string(),
+            connections: vec!["nord".to_string(), "ouest".to_string()],
+            npcs: vec![1],
+            monsters: Some(vec![1]),
+        };
+
+        let zone = Zone::from_raw(raw, &[pnj], &[monstre]);
+        assert_eq!(zone.npcs.len(), 1);
+        assert_eq!(zone.monsters.len(), 1);
+        assert_eq!(zone.npcs[0].name, "Maire du Village");
+        assert_eq!(zone.monsters[0].name, "Loup Enragé");
+    }
+
+    #[test]
+    fn test_entites_manquantes() {
+        let raw = ZoneRaw {
+            id: 4,
+            name: "Zone Vide".to_string(),
+            description: "Aucune entité trouvée".to_string(),
+            connections: vec!["est".to_string()],
+            npcs: vec![999], // ID inexistant
+            monsters: Some(vec![888]), // ID inexistant
+        };
+
+        let zone = Zone::from_raw(raw, &[], &[]);
+        assert_eq!(zone.npcs.len(), 0);
+        assert_eq!(zone.monsters.len(), 0);
+    }
+}
