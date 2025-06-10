@@ -1,0 +1,43 @@
+{
+  "nom": "Inconnu",
+  "base_stats": {
+    "health": 80,
+    "strength": 6,
+    "defense": 5,
+    "agility": 10
+  },
+  "current_health": 80,
+  "inventaire": [
+    {
+      "id": 1,
+      "name": "Potion de Soin",
+      "description": "Restaure 30 points de vie",
+      "value": 25,
+      "item_type": "Consommable",
+      "utilisable": true,
+      "health": 30,
+      "strength": 0,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 2,
+      "name": "Épée d'Entraînement",
+      "description": "Une épée basique pour débuter",
+      "value": 50,
+      "item_type": "Arme",
+      "utilisable": true,
+      "health": 0,
+      "strength": 3,
+      "defense": 0,
+      "agility": 0
+    }
+  ],
+  "equipment": {
+    "arme": null,
+    "armure": null,
+    "amulette": null
+  },
+  "current_zone_id": 2,
+  "monster_kills": {}
+}
