@@ -1,68 +1,122 @@
 [
-    {
-      "id": 1,
-      "name": "Potion de soin",
-      "description": "Rend 50 points de vie",
-      "value": 75,
-      "item_type": "Consommable",
-      "utilisable": true
-    },
-    {
-      "id": 2,
-      "name": "Épée courte",
-      "description": "Une lame légère et maniable.",
-      "value": 100,
-      "item_type": "Arme",
-      "utilisable": false
-    }
-  ,
-{
+  {
+    "id": 1,
+    "name": "Potion de Soin",
+    "description": "Restaure 50 points de vie",
+    "value": 25,
+    "item_type": "Consommable",
+    "utilisable": true,
+    "health": 50,
+    "strength": 0,
+    "defense": 0,
+    "agility": 0
+  },
+  {
+    "id": 2,
+    "name": "Épée en Fer",
+    "description": "Une épée solide en fer forgé",
+    "value": 150,
+    "item_type": "Arme",
+    "utilisable": true,
+    "health": 0,
+    "strength": 8,
+    "defense": 0,
+    "agility": 0
+  },
+  {
     "id": 3,
-    "name": "Bouclier en bois",
-    "description": "Un bouclier léger qui offre une protection de base.",
-    "value": 50,
+    "name": "Bouclier en Bois",
+    "description": "Un bouclier léger mais efficace",
+    "value": 75,
     "item_type": "Armure",
-    "utilisable": false
+    "utilisable": true,
+    "health": 0,
+    "strength": 0,
+    "defense": 5,
+    "agility": 0
   },
   {
     "id": 4,
-    "name": "Potion de mana",
-    "description": "Rend 30 points de mana",
-    "value": 80,
-    "item_type": "Consommable",
-    "utilisable": true
+    "name": "Clé Rouillée",
+    "description": "Une vieille clé qui pourrait ouvrir quelque chose",
+    "value": 1,
+    "item_type": "Cle",
+    "utilisable": false,
+    "health": 0,
+    "strength": 0,
+    "defense": 0,
+    "agility": 0
   },
   {
     "id": 5,
-    "name": "Arc long",
-    "description": "Un arc puissant pour les tireurs d'élite.",
-    "value": 150,
-    "item_type": "Arme",
-    "utilisable": false
+    "name": "Herbes Médicinales",
+    "description": "Des herbes rares utilisées en alchimie",
+    "value": 30,
+    "item_type": "ObjetDeQuete",
+    "utilisable": false,
+    "health": 0,
+    "strength": 0,
+    "defense": 0,
+    "agility": 0
   },
   {
     "id": 6,
-    "name": "Armure en cuir",
-    "description": "Une armure légère qui offre une bonne protection.",
+    "name": "Armure de Cuir",
+    "description": "Une armure légère en cuir tanné",
     "value": 120,
     "item_type": "Armure",
-    "utilisable": false
+    "utilisable": true,
+    "health": 10,
+    "strength": 0,
+    "defense": 3,
+    "agility": 1
   },
   {
     "id": 7,
-    "name": "Potion de régénération",
-    "description": "Rend 20 points de vie par seconde pendant 5 secondes.",
-    "value": 100,
-    "item_type": "Consommable",
-    "utilisable": true
+    "name": "Amulette de Vitesse",
+    "description": "Une amulette qui augmente l'agilité",
+    "value": 200,
+    "item_type": "Amulette",
+    "utilisable": true,
+    "health": 0,
+    "strength": 0,
+    "defense": 0,
+    "agility": 5
   },
   {
     "id": 8,
-    "name": "Bâton de mage",
-    "description": "Un bâton puissant qui augmente les dégâts magiques.",
-    "value": 200,
+    "name": "Épée Magique",
+    "description": "Une épée enchantée qui brille d'une lueur mystique",
+    "value": 400,
     "item_type": "Arme",
-    "utilisable": false
+    "utilisable": true,
+    "health": 0,
+    "strength": 12,
+    "defense": 0,
+    "agility": 2
+  },
+  {
+    "id": 9,
+    "name": "Armure de Plates",
+    "description": "Une lourde armure métallique très résistante",
+    "value": 350,
+    "item_type": "Armure",
+    "utilisable": true,
+    "health": 20,
+    "strength": 0,
+    "defense": 8,
+    "agility": -2
+  },
+  {
+    "id": 10,
+    "name": "Amulette de Force",
+    "description": "Une amulette qui décuple la force de celui qui la porte",
+    "value": 300,
+    "item_type": "Amulette",
+    "utilisable": true,
+    "health": 5,
+    "strength": 4,
+    "defense": 0,
+    "agility": 0
   }
 ]
-

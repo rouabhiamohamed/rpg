@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "Gérard le Marchand",
+    "description": "Un vieux marchand aux yeux pétillants",
+    "dialogues": [
+      "Bienvenue dans ma boutique !",
+      "J'ai de très bonnes affaires aujourd'hui !",
+      "Ces herbes me seraient très utiles..."
+    ],
+    "quests": [1]
+  },
+  {
+    "id": 2,
+    "name": "Garde Royal",
+    "description": "Un garde imposant en armure brillante",
+    "dialogues": [
+      "Halt ! Qui va là ?",
+      "Cette zone est sous ma protection.",
+      "J'ai besoin d'aide pour ma patrouille."
+    ],
+    "quests": [3]
+  },
+  {
+    "id": 3,
+    "name": "Elara la Sage",
+    "description": "Une vieille femme aux cheveux blancs, connue pour sa sagesse",
+    "dialogues": [
+      "Bienvenue, jeune aventurier.",
+      "Les secrets anciens m'intéressent beaucoup.",
+      "Cette clé... elle me rappelle quelque chose."
+    ],
+    "quests": [2]
+  },
+  {
+    "id": 4,
+    "name": "Tom le Fermier",
+    "description": "Un fermier simple aux mains calleuses",
+    "dialogues": [
+      "Bonjour ! Belle journée, n'est-ce pas ?",
+      "Les récoltes vont bien cette année.",
+      "Méfiez-vous des loups dans la forêt."
+    ],
+    "quests": []
+  }
+]

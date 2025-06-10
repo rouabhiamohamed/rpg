@@ -1,0 +1,116 @@
+{
+  "nom": "Inconnu",
+  "base_stats": {
+    "health": 90,
+    "strength": 10,
+    "defense": 7,
+    "agility": 15
+  },
+  "current_health": 81,
+  "inventaire": [
+    {
+      "id": 1,
+      "name": "Potion de Soin",
+      "description": "Restaure 50 points de vie",
+      "value": 25,
+      "item_type": "Consommable",
+      "utilisable": true,
+      "health": 50,
+      "strength": 0,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 1,
+      "name": "Potion de Soin",
+      "description": "Restaure 50 points de vie",
+      "value": 25,
+      "item_type": "Consommable",
+      "utilisable": true,
+      "health": 50,
+      "strength": 0,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 1,
+      "name": "Potion de Soin",
+      "description": "Restaure 50 points de vie",
+      "value": 25,
+      "item_type": "Consommable",
+      "utilisable": true,
+      "health": 50,
+      "strength": 0,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 6,
+      "name": "Armure de Cuir",
+      "description": "Une armure légère en cuir tanné",
+      "value": 120,
+      "item_type": "Armure",
+      "utilisable": true,
+      "health": 10,
+      "strength": 0,
+      "defense": 3,
+      "agility": 1
+    },
+    {
+      "id": 7,
+      "name": "Amulette de Vitesse",
+      "description": "Une amulette qui augmente l'agilité",
+      "value": 200,
+      "item_type": "Amulette",
+      "utilisable": true,
+      "health": 0,
+      "strength": 0,
+      "defense": 0,
+      "agility": 5
+    }
+  ],
+  "equipment": {
+    "arme": {
+      "id": 2,
+      "name": "Épée d'Entraînement",
+      "description": "Une épée basique pour débuter",
+      "value": 50,
+      "item_type": "Arme",
+      "utilisable": true,
+      "health": 0,
+      "strength": 3,
+      "defense": 0,
+      "agility": 0
+    },
+    "armure": {
+      "id": 6,
+      "name": "Armure de Cuir",
+      "description": "Une armure légère en cuir tanné",
+      "value": 120,
+      "item_type": "Armure",
+      "utilisable": true,
+      "health": 10,
+      "strength": 0,
+      "defense": 3,
+      "agility": 1
+    },
+    "amulette": {
+      "id": 10,
+      "name": "Amulette de Force",
+      "description": "Une amulette qui décuple la force de celui qui la porte",
+      "value": 300,
+      "item_type": "Amulette",
+      "utilisable": true,
+      "health": 5,
+      "strength": 4,
+      "defense": 0,
+      "agility": 0
+    }
+  },
+  "current_zone_id": 1,
+  "monster_kills": {
+    "1": 2,
+    "5": 1,
+    "2": 1
+  }
+}

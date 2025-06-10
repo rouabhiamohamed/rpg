@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "Loup Sauvage",
+    "description": "Un loup aux yeux perçants et aux crocs acérés",
+    "health": 30,
+    "strength": 8,
+    "defense": 2,
+    "agility": 12,
+    "loot": [1, 6],
+    "experience": 15
+  },
+  {
+    "id": 2,
+    "name": "Gobelin Voleur",
+    "description": "Un petit gobelin maigre armé d'un poignard rouillé",
+    "health": 20,
+    "strength": 6,
+    "defense": 1,
+    "agility": 15,
+    "loot": [4, 7],
+    "experience": 10
+  },
+  {
+    "id": 3,
+    "name": "Ours des Cavernes",
+    "description": "Un énorme ours brun aux griffes redoutables",
+    "health": 60,
+    "strength": 15,
+    "defense": 8,
+    "agility": 4,
+    "loot": [1, 8],
+    "experience": 35
+  },
+  {
+    "id": 4,
+    "name": "Squelette Guerrier",
+    "description": "Un squelette animé portant une épée et un bouclier",
+    "health": 40,
+    "strength": 10,
+    "defense": 6,
+    "agility": 8,
+    "loot": [2, 9],
+    "experience": 25
+  },
+  {
+    "id": 5,
+    "name": "Bandit des Routes",
+    "description": "Un brigand masqué aux intentions malveillantes",
+    "health": 35,
+    "strength": 12,
+    "defense": 4,
+    "agility": 10,
+    "loot": [1, 10],
+    "experience": 20
+  }
+]
