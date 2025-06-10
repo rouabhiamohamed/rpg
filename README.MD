@@ -64,7 +64,7 @@ data/
 - Vérification automatique des prérequis lors du dialogue
 - Quêtes automatiquement terminées si les conditions sont remplies
 - Remise d'objets requis automatique
-- Récompenses en or et expérience
+- Récompenses en or et expérience (théorique)
 
 ### Interactions
 - Dialogue avec les NPCs
