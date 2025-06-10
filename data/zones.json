@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Place du Village",
+    "description": "Une place animée au centre du village. Des marchands proposent leurs marchandises et des gardes patrouillent.",
+    "connections": ["North", "East"],
+    "npcs": [1, 2],
+    "monsters": []
+  },
+  {
+    "id": 2,
+    "name": "Forêt du Nord",
+    "description": "Une forêt dense et mystérieuse. Les arbres anciens murmurent des secrets et des herbes rares poussent dans l'ombre.",
+    "connections": ["South", "East"],
+    "npcs": [],
+    "monsters": [1, 2]
+  },
+  {
+    "id": 11,
+    "name": "Maison d'Elara",
+    "description": "Une petite maison chaleureuse remplie de livres anciens et d'objets mystérieux. L'odeur des herbes séchées flotte dans l'air.",
+    "connections": ["West", "North"],
+    "npcs": [3],
+    "monsters": []
+  },
+  {
+    "id": 12,
+    "name": "Ferme de Tom",
+    "description": "Une ferme paisible avec de vastes champs de blé doré. Des poules picorent dans la cour et un puits se dresse au centre.",
+    "connections": ["South", "West"],
+    "npcs": [4],
+    "monsters": [5]
+  },
+  {
+    "id": 21,
+    "name": "Clairière Mystique",
+    "description": "Une clairière baignée de lumière argentée où la magie semble plus forte. Un ancien cercle de pierres trône au centre.",
+    "connections": ["South"],
+    "npcs": [],
+    "monsters": [3, 4]
+  }
+]

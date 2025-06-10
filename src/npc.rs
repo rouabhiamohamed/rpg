@@ -7,7 +7,7 @@ pub struct NpcRaw {
     pub name: String,
     pub description: String,
     pub dialogues: Vec<String>,
-    pub quests: Vec<u32>,
+    pub quests: Vec<u32>, // IDs des quêtes
 }
 
 #[derive(Debug, Clone)]
@@ -60,6 +60,7 @@ impl Npc {
         }
     }
 }
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -71,6 +72,7 @@ mod tests {
             id: 1,
             name: "Test Quest".to_string(),
             description: "Desc".to_string(),
+            objet_requis_id: None,
             completed: false,
         };
         let npc = Npc {
@@ -95,6 +97,3 @@ mod tests {
         assert!(npc.interact().contains("n'a rien à dire"));
     }
 }
-
-
-

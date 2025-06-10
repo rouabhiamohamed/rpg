@@ -1,0 +1,38 @@
+[
+  {
+    "profile": "Guerrier",
+    "stats": {
+      "health": 120,
+      "strength": 15,
+      "defense": 12,
+      "agility": 6
+    }
+  },
+  {
+    "profile": "Mage",
+    "stats": {
+      "health": 80,
+      "strength": 6,
+      "defense": 5,
+      "agility": 10
+    }
+  },
+  {
+    "profile": "Voleur",
+    "stats": {
+      "health": 90,
+      "strength": 10,
+      "defense": 7,
+      "agility": 15
+    }
+  },
+  {
+    "profile": "Paladin",
+    "stats": {
+      "health": 110,
+      "strength": 12,
+      "defense": 15,
+      "agility": 8
+    }
+  }
+]
