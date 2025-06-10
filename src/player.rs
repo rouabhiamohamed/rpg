@@ -255,3 +255,87 @@ impl Player {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::item::{ItemType, Item};
+
+    fn dummy_item(name: &str, health: i32, strength: i32, defense: i32, agility: i32) -> Item {
+        Item {
+            id: 0,
+            name: name.to_string(),
+            description: "".to_string(),
+            value: 0,
+            item_type: ItemType::Consommable,
+            utilisable: false,
+            health,
+            strength,
+            defense,
+            agility,
+        }
+    }
+
+    fn create_test_player() -> Player {
+        let base_stats = Attributes::new(50, 10, 5, 3);
+        Player {
+            nom: "Testeur".to_string(),
+            base_stats: base_stats.clone(),
+            current_health: base_stats.health,
+            inventaire: vec![],
+            equipment: Equipment::new(),
+            current_zone_id: 1,
+            monster_kills: HashMap::new(),
+        }
+    }
+
+    #[test]
+    fn test_total_stats_with_equipment() {
+        let mut player = create_test_player();
+        player.equipment.arme = Some(dummy_item("Épée", 0, 5, 0, 0));
+        player.equipment.armure = Some(dummy_item("Armure", 10, 0, 3, 0));
+        player.equipment.amulette = Some(dummy_item("Amulette", 5, 0, 0, 2));
+
+        let total = player.get_total_stats();
+        assert_eq!(total.health, 50 + 10 + 5);
+        assert_eq!(total.strength, 10 + 5);
+        assert_eq!(total.defense, 5 + 3);
+        assert_eq!(total.agility, 3 + 2);
+    }
+
+    #[test]
+    fn test_heal_and_damage() {
+        let mut player = create_test_player();
+        player.take_damage(30);
+        assert_eq!(player.current_health, 20);
+
+        player.heal(5);
+        assert_eq!(player.current_health, 25);
+
+        player.heal(50); // Ne doit pas dépasser la santé max
+        assert_eq!(player.current_health, player.get_max_health());
+    }
+
+    #[test]
+    fn test_is_alive_logic() {
+        let mut player = create_test_player();
+        assert!(player.is_alive());
+
+        player.take_damage(999);
+        assert_eq!(player.current_health, 0);
+        assert!(!player.is_alive());
+    }
+
+    #[test]
+    fn test_monster_kills_tracking() {
+        let mut player = create_test_player();
+        assert_eq!(player.get_monster_kills(42), 0);
+
+        player.add_monster_kill(42);
+        assert_eq!(player.get_monster_kills(42), 1);
+
+        player.add_monster_kill(42);
+        assert_eq!(player.get_monster_kills(42), 2);
+    }
+}
+

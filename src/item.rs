@@ -71,3 +71,70 @@ impl Item {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn make_item(
+        item_type: ItemType,
+        health: i32,
+        strength: i32,
+        defense: i32,
+        agility: i32,
+    ) -> Item {
+        Item {
+            id: 1,
+            name: "Test Item".to_string(),
+            description: "Un objet pour test".to_string(),
+            value: 100,
+            item_type,
+            utilisable: true,
+            health,
+            strength,
+            defense,
+            agility,
+        }
+    }
+
+    #[test]
+    fn test_is_equipable() {
+        assert!(make_item(ItemType::Arme, 0, 0, 0, 0).is_equipable());
+        assert!(make_item(ItemType::Armure, 0, 0, 0, 0).is_equipable());
+        assert!(make_item(ItemType::Amulette, 0, 0, 0, 0).is_equipable());
+        assert!(!make_item(ItemType::Consommable, 0, 0, 0, 0).is_equipable());
+        assert!(!make_item(ItemType::Cle, 0, 0, 0, 0).is_equipable());
+    }
+
+    #[test]
+    fn test_is_consumable() {
+        assert!(make_item(ItemType::Consommable, 0, 0, 0, 0).is_consumable());
+        assert!(!make_item(ItemType::Arme, 0, 0, 0, 0).is_consumable());
+    }
+
+    #[test]
+    fn test_get_type_name() {
+        let item = make_item(ItemType::ObjetDeQuete, 0, 0, 0, 0);
+        assert_eq!(item.get_type_name(), "Objet de Quête");
+
+        let item2 = make_item(ItemType::Amulette, 0, 0, 0, 0);
+        assert_eq!(item2.get_type_name(), "Amulette");
+    }
+
+    #[test]
+    fn test_get_stats_description_none() {
+        let item = make_item(ItemType::Arme, 0, 0, 0, 0);
+        assert_eq!(item.get_stats_description(), "Aucun bonus");
+    }
+
+    #[test]
+    fn test_get_stats_description_some() {
+        let item = make_item(ItemType::Arme, 5, 0, -2, 3);
+        let desc = item.get_stats_description();
+        assert!(desc.contains("Santé: +5"));
+        assert!(desc.contains("Défense: -2"));
+        assert!(desc.contains("Agilité: +3"));
+        assert!(!desc.contains("Force")); // car force = 0
+    }
+}
+

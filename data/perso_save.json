@@ -1,12 +1,12 @@
 {
-  "nom": "Inconnu",
+  "nom": "momo",
   "base_stats": {
-    "health": 80,
-    "strength": 6,
-    "defense": 5,
-    "agility": 10
+    "health": 110,
+    "strength": 12,
+    "defense": 15,
+    "agility": 8
   },
-  "current_health": 80,
+  "current_health": 94,
   "inventaire": [
     {
       "id": 1,
@@ -31,6 +31,78 @@
       "strength": 3,
       "defense": 0,
       "agility": 0
+    },
+    {
+      "id": 1,
+      "name": "Potion de Soin",
+      "description": "Restaure 50 points de vie",
+      "value": 25,
+      "item_type": "Consommable",
+      "utilisable": true,
+      "health": 50,
+      "strength": 0,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 10,
+      "name": "Amulette de Force",
+      "description": "Une amulette qui décuple la force de celui qui la porte",
+      "value": 300,
+      "item_type": "Amulette",
+      "utilisable": true,
+      "health": 5,
+      "strength": 4,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 1,
+      "name": "Potion de Soin",
+      "description": "Restaure 50 points de vie",
+      "value": 25,
+      "item_type": "Consommable",
+      "utilisable": true,
+      "health": 50,
+      "strength": 0,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 10,
+      "name": "Amulette de Force",
+      "description": "Une amulette qui décuple la force de celui qui la porte",
+      "value": 300,
+      "item_type": "Amulette",
+      "utilisable": true,
+      "health": 5,
+      "strength": 4,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 1,
+      "name": "Potion de Soin",
+      "description": "Restaure 50 points de vie",
+      "value": 25,
+      "item_type": "Consommable",
+      "utilisable": true,
+      "health": 50,
+      "strength": 0,
+      "defense": 0,
+      "agility": 0
+    },
+    {
+      "id": 8,
+      "name": "Épée Magique",
+      "description": "Une épée enchantée qui brille d'une lueur mystique",
+      "value": 400,
+      "item_type": "Arme",
+      "utilisable": true,
+      "health": 0,
+      "strength": 12,
+      "defense": 0,
+      "agility": 2
     }
   ],
   "equipment": {
@@ -38,6 +110,9 @@
     "armure": null,
     "amulette": null
   },
-  "current_zone_id": 2,
-  "monster_kills": {}
+  "current_zone_id": 12,
+  "monster_kills": {
+    "3": 1,
+    "5": 2
+  }
 }
